@@ -19,7 +19,7 @@ namespace :libsass do
   file "lib/libsass.so" => "Makefile" do
     make_program = ENV['MAKE']
     make_program ||= case RUBY_PLATFORM
-                     when /mswin/
+                     when /mswin|mingw/
                        'nmake'
                      when /(bsd|solaris)/
                        'gmake'
