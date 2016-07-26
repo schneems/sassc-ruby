@@ -120,7 +120,7 @@ module SassC
 
     def load_paths
       paths = @options[:load_paths]
-      paths.join(":") if paths
+      paths.join(File::PATH_SEPARATOR) if paths
     end
   end
 end
