@@ -1,23 +1,24 @@
-# Operating system (build VM template)
+---
 os: Visual Studio 2015
-
-install:
-  - set PATH=C:\Ruby22\bin;%PATH%
-  - bundle install
-
+version: "{build}"
 build: off
-
-before_test:
-  - ruby -v
-  - gem -v
-  - bundle -v
-
+clone_depth: 10
+install:
+  - SET PATH=C:\Ruby%ruby_version%\bin;%PATH%
+  - ruby --version
+  - gem --version
+  - gem install bundler --quiet --no-ri --no-rdoc
+  - bundler --version
+  - bundle install
 test_script:
-  - bundle exec rake
+  - bundle exec rake test
 
 environment:
   matrix:
-    - RUBY_VERSION: 23
-    - RUBY_VERSION: 22
-    - RUBY_VERSION: 21
-    - RUBY_VERSION: 200
+    - ruby_version: "193"
+    - ruby_version: "200"
+    - ruby_version: "200-x64"
+    - ruby_version: "21"
+    - ruby_version: "21-x64"
+    - ruby_version: "22"
+    - ruby_version: "22-x64"
