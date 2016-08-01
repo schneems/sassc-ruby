@@ -20,12 +20,12 @@ namespace :libsass do
     make_program = ENV['MAKE']
     make_program ||= case RUBY_PLATFORM
                      when /mswin|mingw/
-                       'nmake'
+                       'msbuild /m:4 /p:Configuration=Release win/libsass.sln'
                      when /(bsd|solaris)/
-                       'gmake'
+                       'gmake lib/libsass.so'
                      else
-                       'make'
+                       'make lib/libsass.so'
                      end
-    sh "#{make_program} lib/libsass.so"
+    sh "#{make_program}"
   end
 end
