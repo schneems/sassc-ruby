@@ -6,7 +6,12 @@ module SassC
 
     spec = Gem.loaded_specs["sassc"]
     gem_root = spec.gem_dir
-    ffi_lib "#{gem_root}/ext/libsass/lib/libsass.so"
+    if RUBY_PLATFORM =~ /mswin|mingw/
+      libsass_path = "#{gem_root}/ext/libsass/win/bin/libsass.dll"
+    else
+      libsass_path = "#{gem_root}/ext/libsass/lib/libsass.so"
+    end
+    ffi_lib libsass_path
 
     require_relative "native/sass_value"
 
